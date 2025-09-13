@@ -25,17 +25,18 @@ New custom fields:
 ## Package installation
 
 > #### Requirement
-> Laravel: v8+ or v9+  
-> Voyager: v1.6+  
-> You should fully install the package [Voyager](https://github.com/the-control-group/voyager) before.
+> Laravel: v8+, v9+, v10+, v11+, v12+  
+> Voyager: v1.6+ (recommended: kupidonkhv/voyager-fork for Laravel 12 compatibility)  
+> You should fully install the package [Voyager](https://github.com/the-control-group/voyager) or [Voyager Fork](https://github.com/kupidonkhv/voyager-fork) before.
 
 Via Composer
 
 ``` bash
-$ composer require monstrex/voyager-extension
+$ composer require kupidonkhv/voyager-extension
 ```
 
 Then run migrations:
+
 
 ``` bash
 $ php artisan migrate
