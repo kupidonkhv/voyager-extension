@@ -1,5 +1,5 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
-// Distributed under an MIT license: https://codemirror.net/LICENSE
+// Distributed under an MIT license: https://codemirror.net/5/LICENSE
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
@@ -101,12 +101,12 @@
           }
           replaceToken = true;
         }
-        function returnHintsFromAtValues(atValues) {
+        var returnHintsFromAtValues = function(atValues) {
           if (atValues)
             for (var i = 0; i < atValues.length; ++i) if (!prefix || matches(atValues[i], prefix, matchInMiddle))
               result.push(quote + atValues[i] + quote);
           return returnHints();
-        }
+        };
         if (atValues && atValues.then) return atValues.then(returnHintsFromAtValues);
         return returnHintsFromAtValues(atValues);
       } else { // An attribute name

@@ -1,5 +1,5 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
-// Distributed under an MIT license: https://codemirror.net/LICENSE
+// Distributed under an MIT license: https://codemirror.net/5/LICENSE
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
@@ -50,11 +50,12 @@
 
   function onComposition(cm) {
     setTimeout(function() {
-      var empty = false, input = cm.getInputField()
-      if (input.nodeName == "TEXTAREA")
-        empty = !input.value
-      else if (cm.lineCount() == 1)
-        empty = !/[^\u200b]/.test(input.querySelector(".CodeMirror-line").textContent)
+      var empty = false
+      if (cm.lineCount() == 1) {
+        var input = cm.getInputField()
+        empty = input.nodeName == "TEXTAREA" ? !cm.getLine(0).length
+          : !/[^\u200b]/.test(input.querySelector(".CodeMirror-line").textContent)
+      }
       if (empty) setPlaceholder(cm)
       else clearPlaceholder(cm)
     }, 20)
