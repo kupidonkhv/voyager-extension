@@ -3,7 +3,19 @@
 // ------------------------------
 var trans = function(key, replace = {})
 {
+    // Check if translations are loaded
+    if (!window.translations || Object.keys(window.translations).length === 0) {
+        console.warn('Translations not loaded yet for key:', key);
+        return key; // Return key as fallback
+    }
+    
     var translation = key.split('.').reduce((t, i) => t[i] || null, window.translations);
+
+    // If translation not found, return the key
+    if (!translation) {
+        console.warn('Translation not found for key:', key);
+        return key;
+    }
 
     for (var placeholder in replace) {
         translation = translation.replace(`:${placeholder}`, replace[placeholder]);
@@ -203,13 +215,28 @@ var readURL = function (input)
 // Load translations from the backend
 // ------------------------------
 window.translations = {};
-$.get(`/${window.rootAdminRoute}/voyager-extension-translations`, null, function (data) {
-    if (data) {
-        window.translations = data;
-    } else {
-        toastr.error(vext.trans('bread.error_translation_loading'));
-    }
-});
+window.translationsLoaded = false;
+
+function loadTranslations() {
+    return $.get(`/${window.rootAdminRoute}/voyager-extension-translations`, null, function (data) {
+        if (data) {
+            window.translations = data;
+            window.translationsLoaded = true;
+            $(document).trigger('translationsLoaded');
+        } else {
+            console.error('Failed to load translations');
+            window.translationsLoaded = true; // Mark as loaded even if failed
+            $(document).trigger('translationsLoaded');
+        }
+    }).fail(function() {
+        console.error('Error loading translations');
+        window.translationsLoaded = true;
+        $(document).trigger('translationsLoaded');
+    });
+}
+
+// Start loading translations immediately
+loadTranslations();
 
 $('document').ready(function () {
 

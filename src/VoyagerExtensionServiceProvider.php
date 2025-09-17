@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Foundation\AliasLoader;
-use Config;
-use Lang;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Lang;
 
 use MonstreX\VoyagerExtension\Generators\MediaLibraryPathGenerator;
 use MonstreX\VoyagerExtension\Generators\MediaLibraryUrlGenerator;

@@ -1,13 +1,13 @@
 {
   "private": true,
   "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
@@ -18,8 +18,8 @@
     "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
-    "codemirror": "^5.58.2",
-    "sortablejs": "^1.10.2",
-    "zebra_dialog": "^3.0.0"
+    "codemirror": "^5.65.16",
+    "sortablejs": "^1.15.6",
+    "zebra_dialog": "^3.1.0"
   }
 }

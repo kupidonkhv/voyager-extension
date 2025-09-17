@@ -15,11 +15,14 @@ window.Sortable = Sortable;
 // Local JS code
 window.vext = require('./common.js');
 
-// Fields Specific
-require('./adv_image.js');
-require('./adv_json.js');
-require('./adv_inline.js');
-require('./adv_related.js');
-require('./adv_media_files.js');
-require('./adv_page_layout.js');
-require('./voyager_legacy.js');
+// Wait for translations to load before loading field-specific scripts
+$(document).on('translationsLoaded', function() {
+    // Fields Specific
+    require('./adv_image.js');
+    require('./adv_json.js');
+    require('./adv_inline.js');
+    require('./adv_related.js');
+    require('./adv_media_files.js');
+    require('./adv_page_layout.js');
+    require('./voyager_legacy.js');
+});
