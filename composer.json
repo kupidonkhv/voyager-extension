@@ -1,7 +1,7 @@
 {
      "name": "kupidonkhv/voyager-extension",
      "description": "Voyager Admin Panel Extension with Laravel 12 compatibility",
-     "version": "1.0.1",
+     "version": "1.0.2",
      "license": "MIT",
      "authors": [
        {
