@@ -253,9 +253,16 @@ class VoyagerExtensionServiceProvider extends ServiceProvider
     protected function loadTranslationsJS()
     {
         Cache::rememberForever('translations', function () {
-            return [
+            $translations = [
                 'bread' => Lang::get('voyager-extension::bread'),
             ];
+            
+            // Ensure translations are not empty and have proper structure
+            if (empty($translations['bread']) || !is_array($translations['bread'])) {
+                $translations['bread'] = [];
+            }
+            
+            return $translations;
         });
     }
 

@@ -3,22 +3,34 @@
 // ------------------------------
 var trans = function(key, replace = {})
 {
-    // Check if translations are loaded
-    if (!window.translations || Object.keys(window.translations).length === 0) {
+    // Check if translations are loaded and have proper structure
+    if (!window.translations || typeof window.translations !== 'object' || Object.keys(window.translations).length === 0) {
         console.warn('Translations not loaded yet for key:', key);
         return key; // Return key as fallback
     }
     
-    var translation = key.split('.').reduce((t, i) => t[i] || null, window.translations);
+    // Safe translation lookup with null checks
+    var parts = key.split('.');
+    var translation = window.translations;
+    
+    for (var i = 0; i < parts.length; i++) {
+        if (translation === null || typeof translation !== 'object' || !translation.hasOwnProperty(parts[i])) {
+            console.warn('Translation path not found:', key);
+            return key;
+        }
+        translation = translation[parts[i]];
+    }
 
-    // If translation not found, return the key
-    if (!translation) {
-        console.warn('Translation not found for key:', key);
+    // If translation is not a string, return the key
+    if (typeof translation !== 'string') {
+        console.warn('Translation is not a string for key:', key);
         return key;
     }
 
     for (var placeholder in replace) {
-        translation = translation.replace(`:${placeholder}`, replace[placeholder]);
+        if (replace.hasOwnProperty(placeholder)) {
+            translation = translation.replace(`:${placeholder}`, replace[placeholder]);
+        }
     }
     return translation;
 }
